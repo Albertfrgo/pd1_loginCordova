@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: antiquewhite;">
+
+    <h2>Login</h2>
+    <label>username</label>
+    <input id="usernameLog">
+    <br><br>
+    <label>password</label>
+    <input id="passwordLog">
+    <br><br>
+    <button onclick=fer_Login()>submit</button>
+    <br><br>
+    <br><br>
+    <h2>Register</h2>
+    <label>username</label>
+    <input id="usernameReg">
+    <br><br>
+    <label>mail</label>
+    <input id="mailReg">
+    <br><br>
+    <label>password</label>
+    <input id="passwordReg">
+    <br><br>
+    <button onclick=registra()>register</button>
+
+    <script>
+        let users={"albert":{"password":123456, "mail":"albert@mail.com"}, "sergio":{"password":"qwerty", "mail":"sergio@mail.com"}};
+        function fer_Login(){
+            console.log("Fer login");
+            let nomUsuari=document.getElementById("usernameLog").value;
+            let contUsuari=document.getElementById("passwordLog").value;
+            document.getElementById("usernameLog").value="";
+            document.getElementById("passwordLog").value="";
+            console.log(nomUsuari);
+            console.log(contUsuari);
+
+            let dadesOk=false;
+            for (const property in users) {
+                console.log(`${property}: ${users[property]}`);
+                if(property==nomUsuari && users[property]["password"]==contUsuari){
+                    dadesOk=true;
+                }
+            }
+            if(dadesOk==true){
+                window.alert("Benvingut")
+            }else{
+                window.alert("El nom o la contrasenya no son correctes")
+            }
+        }
+        function registra(){
+            console.log("Registra");
+            let nomUsuari=document.getElementById("usernameReg").value;
+            let contUsuari=document.getElementById("passwordReg").value;
+            let mailUsuari=document.getElementById("mailReg").value;
+            document.getElementById("usernameReg").value="";
+            document.getElementById("passwordReg").value="";
+            document.getElementById("mailReg").value="";
+            console.log(nomUsuari);
+            console.log(contUsuari);
+            
+            let usuariExisteix=false;
+            for (const property in users) {
+                console.log(`${property}: ${users[property]["password"]}: ${users[property]["mail"]}`);
+                if(property==nomUsuari && users[property]["password"]==contUsuari && users[property]["mail"]==mailUsuari){
+                    usuariExisteix=true;
+                }
+            }
+            if(usuariExisteix==false){
+                users[nomUsuari]={"password":contUsuari, "mail":mailUsuari};
+                window.alert("Usuari registrat correctament amb aquestes dades: \nnom: "+nomUsuari+"\nmail: "+mailUsuari)
+            }else{
+                window.alert("L'usuari "+nomUsuari +" amb la contrasenya "+contUsuari +" i el mail "+mailUsuari+" ja existeix")
+            }
+
+        }
+
+    </script>
+
+</body>
+
+
+</html>
